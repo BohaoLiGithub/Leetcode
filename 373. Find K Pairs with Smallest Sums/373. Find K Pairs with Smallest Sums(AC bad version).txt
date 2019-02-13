@@ -1,0 +1,35 @@
+import heapq
+import functools
+
+@functools.total_ordering
+class Pair(object):
+    def __init__(self,val1,val2):
+        self.val1 = val1
+        self.val2 = val2
+        self.num = val1 + val2
+    def __lt__(self,other):
+        return self.num < other.num
+    def __eq__(self,other):
+        return self.num == other.num
+
+class Solution(object):
+    def kSmallestPairs(self, nums1, nums2, k):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        if len(nums1) == 0 or len(nums2) == 0:
+            return []
+        temp = []
+        for i in range(len(nums1)):
+            for j in range(len(nums2)):
+                temp.append(Pair(nums1[i],nums2[j]))
+        heapq.heapify(temp)
+        res = []
+        for _ in range(k if k <= len(nums1)*len(nums2) else len(nums1)*len(nums2)):
+            a = heapq.heappop(temp)
+            #print(a.num)
+            res.append([a.val1,a.val2])
+        return res

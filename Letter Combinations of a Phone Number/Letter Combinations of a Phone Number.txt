@@ -1,0 +1,16 @@
+class Solution(object):
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        dictA = {'2':'abc','3':'def','4':'ghi','5':'jkl','6':'mno','7':'pqrs','8':'tuv','9':'wxyz'}
+        if len(digits) == 0:
+            return []
+        elif len(digits) == 1:
+            return list(dictA[digits[0]])
+        else:
+            previous = self.letterCombinations(digits[:-1])
+            addition = dictA[digits[-1]]
+            res = [i + j for i in previous for j in addition]
+            return res

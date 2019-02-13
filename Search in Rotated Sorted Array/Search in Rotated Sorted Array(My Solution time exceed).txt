@@ -1,0 +1,49 @@
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        length = len(nums)
+        if length == 0:
+            return -1
+        else:
+            i = length / 2
+            while i >=0 and i <= length - 1:
+                if target == nums[i]:
+                    return i
+                elif target < nums[i]:
+                    i = i / 2
+                elif target > nums[i+1]:
+                    i = (length- 1 + i)/2
+        return -1
+
+
+
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        length = len(nums)
+        if length == 0:
+            return -1
+        else:
+            low, high = 0, length - 1
+            mid = high / 2
+            while low <= high:
+                if nums[mid] == target:
+                    return mid
+                elif nums[low] < target < nums[mid]:
+                    high = mid - 1     
+                elif nums[mid] < target < nums[high]:
+                    low = mid + 1
+                elif nums[mid] > target > nums[high]:
+                    low = mid + 1
+                elif nums[low] > target > nums[mid]:
+                    high = mid + 1
+                mid = (low + high)/2  
+        return -1

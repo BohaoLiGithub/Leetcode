@@ -1,0 +1,60 @@
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.capacity = capacity
+        self.cache = {}
+        self.LRU = [] # key
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+        #print("get key:"+str(key))
+        #print("before:"+ str(self.LRU))
+        for i in range(len(self.LRU)):
+            if self.LRU[i] == key:
+                #print(key in self.cache.keys())
+                self.LRU.remove(key)
+                self.LRU.insert(0,key)
+                #print("after:"+ str(self.LRU))
+                #print("get:"+ str(self.cache[key]))
+                return self.cache[key]
+        #print("after:"+ str(self.LRU))
+        return -1
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: void
+        """
+        #print("put key:"+str(key))
+        if key in self.cache.keys():
+            self.LRU.remove(key)
+            self.LRU.insert(0,key)
+            self.cache[key] = value
+            return
+        length = len(self.cache)
+        if length + 1 > self.capacity:
+            evict = self.LRU[-1]
+            #print("cache pop before:"+str(self.cache))
+            self.cache.pop(evict,None)
+            #print("cache pop after:"+str(self.cache))
+            self.LRU.pop()
+            self.LRU.insert(0,key)
+            self.cache[key] = value
+            #print("put:"+str(self.LRU))
+        else:
+            self.LRU.insert(0,key)
+            self.cache[key] = value
+            #print("cache add:"+str(self.cache))
+            #print("put:"+str(self.LRU))
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)

@@ -1,0 +1,30 @@
+class Solution(object):
+    def permuteUnique(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        if not nums:
+            return []
+        nums.sort()
+        result = []
+        templist = []
+        dicA = {}
+        for i in range(len(nums)):
+            dicA[i] = False
+        def helper():
+            if len(templist) == len(nums):
+                addlist = list(templist)
+                result.append(addlist)
+            else:
+                for i in range(len(nums)):
+                    if (dicA[i]) or (i > 0 and nums[i] == nums[i-1] and not dicA[i-1]):
+                        continue
+                    else:
+                        dicA[i] = True
+                        templist.append(nums[i])
+                        helper()
+                        dicA[i] = False
+                        templist.pop()
+        helper()
+        return result

@@ -1,0 +1,13 @@
+class Solution(object):
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        maxA = int(0)
+        for i, val1 in enumerate(height[0:]):
+            for j,val2 in enumerate(height[i:],i):
+                tempheight = min(val1,val2)
+                tempArea = (j-i)*tempheight
+                maxA = max(maxA,tempArea)
+        return maxA

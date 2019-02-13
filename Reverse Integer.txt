@@ -1,0 +1,24 @@
+Reverse Integer
+
+class Solution(object):
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        ll = list(str(x))
+        if ll[0] == '-':
+            ll = ll[0] + ''.join(reversed(ll[1:]))
+        else :
+            ll = ''.join(reversed(ll[0:]))
+        ll.lstrip('0')
+        if int(ll) > (pow(2,31)-1) or int(ll) < -pow(2,31):
+           return 0
+        return int(ll)
+
+
+//reversed
+//pow
+//lstrip
+//list(str(x)
+//int(list)
