@@ -1,0 +1,13 @@
+import bisect
+class Solution(object):
+    def countSmaller(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        count = []
+        res = []
+        for num in nums[::-1]:
+            res.append(bisect.bisect_left(count,num))
+            bisect.insort(count,num)
+        return res[::-1]
