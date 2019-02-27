@@ -5,6 +5,12 @@
 #         self.left = None
 #         self.right = None
 
+# There are three different situations which allow us pop a node from the stack
+# (1) This node doesnt have both left and right child
+# (2) This node doesn't have right child and the last node being popped from stack is the left child of this node
+# (3) The last node popped from the stack is the right child of this node
+# We use an extra pointer to record the last node popped from the stack
+
 class Solution(object):
     def postorderTraversal(self, root):
         """
