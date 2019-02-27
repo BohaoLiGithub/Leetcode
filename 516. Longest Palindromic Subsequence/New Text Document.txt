@@ -1,0 +1,23 @@
+# DP
+class Solution(object):
+    def helper(self, i, j, s, cache):
+        if i > j:
+            return 0
+        elif i == j:
+            return 1
+        elif i in cache and j in cache[i]:
+            return cache[i][j]
+        elif s[i] == s[j]:
+            cache[i][j] = self.helper(i+1, j-1, s, cache) + 2
+            return cache[i][j]
+        else:
+            cache[i][j] = max(self.helper(i, j-1, s, cache), self.helper(i+1, j, s, cache))
+            return cache[i][j]
+    
+    def longestPalindromeSubseq(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        cache = collections.defaultdict(dict)
+        return self.helper(0, len(s)-1, s, cache)
