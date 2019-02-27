@@ -5,6 +5,11 @@
 #         self.left = None
 #         self.right = None
 
+# First of all, we traverse s layer by layer, if we found a node's val is equal to the value of root of t,
+# Then, we start to judge, we design a function isPart. There are two things we need to judge, structure and value
+# Once the structure is not the same, which is a target node do not exist in both of the trees, we return False
+# Then even the target node exist in both of trees, the value do not equal respectively, we also return False
+
 class Solution(object):
     def isSubtree(self, s, t):
         """
