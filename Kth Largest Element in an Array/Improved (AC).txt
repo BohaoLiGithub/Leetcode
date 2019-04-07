@@ -1,0 +1,16 @@
+from Queue import PriorityQueue
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        ##nums.sort()
+        ##return nums[-k]
+        queue = PriorityQueue()
+        for val in nums:
+            queue.put(val)
+            if queue.qsize() > k:
+                queue.get()
+        return queue.get()
